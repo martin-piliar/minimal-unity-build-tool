@@ -1,0 +1,19 @@
+{
+  "name": "sk.martinpiliar.minimal-unity-build-tool",
+  "version": "1.0.0",
+  "displayName": "Minimal Unity Build Tool",
+  "description": "Super quick way to build your prototypes into different platforms without the need to swap between them.",
+  "unity": "2018.4",
+  "author": {
+    "name": "Martin Piliar",
+    "email": "martin@piliar.me",
+    "url": "https://piliar.me/"
+  },
+  "keywords": [
+    "unity",
+    "build",
+    "minimal",
+    "simple"
+  ],
+  "license": "MIT"
+}
