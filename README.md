@@ -1,3 +1,5 @@
+![minimal-build-tool-logo](https://github.com/user-attachments/assets/b031eed5-4416-4403-a93a-86568c5c9518)
+
 # Minimal Unity Build Tool
 
 Minimal Unity Build Tool is a super quick way to build your prototypes into different platforms without the need to swap between them.
