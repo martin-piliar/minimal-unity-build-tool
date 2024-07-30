@@ -52,6 +52,7 @@ public abstract class Builder
         if (report.summary.result == BuildResult.Succeeded)
         {
             Debug.Log($"Build succeeded: {report.summary.outputPath}");
+            RevealBuildInFileExplorer(report.summary.outputPath);
         }
         else
         {
@@ -76,5 +77,21 @@ public abstract class Builder
         BuildReport report = ExecuteBuild(buildPlayerOptions);
 
         PostBuildActions(report);
+    }
+    
+    protected void RevealBuildInFileExplorer(string path)
+    {
+        if (File.Exists(path))
+        {
+            EditorUtility.RevealInFinder(path);
+        }
+        else if (Directory.Exists(path))
+        {
+            EditorUtility.RevealInFinder(path);
+        }
+        else
+        {
+            Debug.LogWarning($"Unable to reveal in file explorer. Path does not exist: {path}");
+        }
     }
 }
