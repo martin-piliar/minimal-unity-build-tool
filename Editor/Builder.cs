@@ -42,9 +42,10 @@ public abstract class Builder
             .ToArray();
     }
 
-    protected virtual void PreBuildSetup(string buildPath)
+    protected virtual void PreBuildActions(string buildPath)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(buildPath) ?? string.Empty);
+        BuildPluginManager.ExecutePreBuild(BuildTarget);
     }
 
     protected virtual void PostBuildActions(BuildReport report)
@@ -52,7 +53,7 @@ public abstract class Builder
         if (report.summary.result == BuildResult.Succeeded)
         {
             Debug.Log($"Build succeeded: {report.summary.outputPath}");
-            RevealBuildInFileExplorer(report.summary.outputPath);
+            BuildPluginManager.ExecutePostBuild(report);
         }
         else
         {
@@ -70,28 +71,12 @@ public abstract class Builder
         string buildName = GenerateBuildName();
         string buildPath = GetBuildPath(buildName);
 
-        PreBuildSetup(buildPath);
+        PreBuildActions(buildPath);
 
         BuildPlayerOptions buildPlayerOptions = GetBuildPlayerOptions(buildPath);
 
         BuildReport report = ExecuteBuild(buildPlayerOptions);
 
         PostBuildActions(report);
-    }
-    
-    protected void RevealBuildInFileExplorer(string path)
-    {
-        if (File.Exists(path))
-        {
-            EditorUtility.RevealInFinder(path);
-        }
-        else if (Directory.Exists(path))
-        {
-            EditorUtility.RevealInFinder(path);
-        }
-        else
-        {
-            Debug.LogWarning($"Unable to reveal in file explorer. Path does not exist: {path}");
-        }
     }
 }

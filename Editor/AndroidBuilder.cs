@@ -24,7 +24,7 @@ public class AndroidBuilder : Builder
         string buildName = GenerateBuildName();
         string buildPath = GetBuildPath(buildName);
 
-        PreBuildSetup(buildPath);
+        PreBuildActions(buildPath);
 
         BuildPlayerOptions buildPlayerOptions = GetBuildPlayerOptions(buildPath);
         buildPlayerOptions.options |= BuildOptions.AutoRunPlayer;
